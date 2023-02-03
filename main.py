@@ -1,6 +1,17 @@
 import time
 import math
 
+#en failsafe, der kan genstarte programmet, i tilfælde af ugyldigt input. Mere effektivt end at skulle høre det igen.
+def failsafe(reason):
+    #Fejlbesked. Hvis en funktion aktiverer failsafe, giver det også en forsimplet error-message.
+    print("Fejlinput: " + reason + ". Genstarter proces")
+
+    #genstart, med tilstrækkeligt delay til at man kan læse error-beskeden.
+    time.sleep(2)
+    print("")
+    oprtn()
+
+
 #Grundlæggende matematik.
 def basic():
     #Her modtages værdierne
@@ -8,6 +19,11 @@ def basic():
     #Note to self: måske kunne man bruge endnu en liste, til at finde operatorenes positioner, og derfra lave længere
     #udregniner mulige. Værd at undersøge.
     regnestykke = input("Skriv regnestykket (med mellemrum mellem symbolerne): ")
+
+    # Her kører en failsafe, hvis man bruger kommaer.
+    if "," in regnestykke:
+        failsafe("Brug punktum i stedet for komma")
+
     indhold = regnestykke.split(" ")
 
     #baseret på brugte værdier, udregnes matematikken her.
@@ -23,6 +39,8 @@ def basic():
     elif "/" in indhold:
         indhold.remove("/")
         print(indhold[0], " / ", indhold[1], " = ", float(indhold[0]) / float(indhold[1]))
+    else:
+        failsafe("Ugyldig operation")
 
     #Her genstartes programmet.
     time.sleep(1)
@@ -33,6 +51,11 @@ def ekspn():
     print("Input værdier. '+' tages som eksponenter, '-' bruges til rødder, og kan indtil videre kun bruges til kvadratrødder ved enkelte tal. Husk mellemrum mellem symboler")
     #Her splittes inputtet i en liste
     regnestykke = input("værdier: ")
+
+    #Her kører en failsafe, hvis man bruger kommaer.
+    if "," in regnestykke:
+        failsafe("Brug punktum i stedet for komma")
+
     indhold = regnestykke.split(" ")
 
     #Her sorteres listen efter brugbare værdier, for at afgøre operationen.
@@ -42,8 +65,10 @@ def ekspn():
     if "-" in indhold:
         indhold.remove("-")
         print("kvadratroden af ", indhold[0], "er " , math.sqrt(float(indhold[0])))
+    else:
+        failsafe("Ugyldig operation")
 
-    #Her genstartes programmet.
+    #Her genstartes programmet (uanset hvilken funktion er blevet kørt).
     time.sleep(1)
     print("")
     oprtn()
@@ -68,10 +93,7 @@ def oprtn():
         return
     #Backup, i tilfælde af fejlinput, eller hvis folk bliver for kreative.
     else:
-        print("Fejlinput, prøv igen")
-        time.sleep(1)
-        print("")
-        oprtn()
+        failsafe("Ugyldig operation")
 
 #Kør
 oprtn()
