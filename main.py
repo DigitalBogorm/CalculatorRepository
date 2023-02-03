@@ -76,7 +76,7 @@ def ekspn():
 
 #Etablering af mulige operationer.
 def oprtn():
-    print("mulige operationer: 'basic math' & 'eksponentielt'")
+    print("mulige operationer: 'basic math' (plus, minus, gange og division) & 'eksponentielt'")
     operation = input("Vælg en matematisk operation: ")
     operation = operation.lower() #Reducerer risiko mht. case-sensitivity
     print(operation)
