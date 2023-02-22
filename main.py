@@ -1,7 +1,7 @@
 import time
 import math
 
-#en failsafe, der kan genstarte programmet, i tilfælde af ugyldigt input. Mere effektivt end at skulle høre det igen.
+#en failsafe, der kan genstarte programmet, i tilfælde af ugyldigt input. Mere effektivt end at skulle køre det igen.
 def failsafe(reason):
     #Fejlbesked. Hvis en funktion aktiverer failsafe, giver det også en forsimplet error-message.
     print("Fejlinput: " + reason + ". Genstarter proces")
@@ -27,20 +27,20 @@ def basic():
     indhold = regnestykke.split(" ")
 
     #baseret på brugte værdier, udregnes matematikken her.
-    if "+" in indhold:
+    if "+" in indhold: #Addition
         indhold.remove("+")
         print(indhold[0], " + ", indhold[1], " = ", float(indhold[0])+float(indhold[1]))
-    elif "*" in indhold:
+    elif "*" in indhold:  #multiplikation
         indhold.remove("*")
         print(indhold[0], " * ", indhold[1], " = ", float(indhold[0]) * float(indhold[1]))
-    elif "-" in indhold:
+    elif "-" in indhold:   #subtraktion
         indhold.remove("-")
         print(indhold[0], " - ", indhold[1], " = ", float(indhold[0]) - float(indhold[1]))
-    elif "/" in indhold:
+    elif "/" in indhold:   #Division
         indhold.remove("/")
         print(indhold[0], " / ", indhold[1], " = ", float(indhold[0]) / float(indhold[1]))
     else:
-        failsafe("Ugyldig operation")
+        failsafe("Ugyldig operation, tjek input")
 
     #Her genstartes programmet.
     time.sleep(1)
@@ -66,7 +66,7 @@ def ekspn():
         indhold.remove("-")
         print("kvadratroden af ", indhold[0], "er " , math.sqrt(float(indhold[0])))
     else:
-        failsafe("Ugyldig operation")
+        failsafe("Ugyldig operation, tjek valget af tegn")
 
     #Her genstartes programmet (uanset hvilken funktion er blevet kørt).
     time.sleep(1)
@@ -93,8 +93,7 @@ def oprtn():
         return
     #Backup, i tilfælde af fejlinput, eller hvis folk bliver for kreative.
     else:
-        failsafe("Ugyldig operation")
+        failsafe("Ugyldig/ukendt operationsnavn")
 
 #Kør
 oprtn()
-
